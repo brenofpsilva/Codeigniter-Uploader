@@ -138,7 +138,8 @@
           $.danidemo.addLog('#demo-debug', 'error', 'File \'' + file.name + '\' has a Not Allowed Extension');
         },*/
         onFallbackMode: function(message){
-          $.danidemo.addLog('#demo-debug', 'info', 'Browser not supported(do something else here!): ' + message);
+          $.danidemo.addLog('#demo-debug', 'error', 'Navegador não suportado (!): ' + message);
+          alert ('Navegador não suportado: ' + message);
         }
       });
     </script>    
