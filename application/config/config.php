@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/ci_uploader/';
+$config['base_url']	= 'http://localhost/Codeigniter-Uploader/';
 
 /*
 |--------------------------------------------------------------------------

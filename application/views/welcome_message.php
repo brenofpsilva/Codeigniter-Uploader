@@ -62,7 +62,7 @@
     </div>
 
     <script src="<?php echo base_url()?>js/jquery-1.10.1.min.js"></script>
-    <script src="<?php echo base_url()?>js/demo.js"></script>
+    <script src="<?php echo base_url()?>js/demo-preview.js"></script>
     <script src="<?php echo base_url()?>js/dmuploader.js"></script>
     
     <script type="text/javascript">
@@ -82,6 +82,26 @@
         },
         onNewFile: function(id, file){
           $.danidemo.addFile('#demo-files', id, file);
+          
+          /*** Begins Image preview loader ***/
+          if (typeof FileReader !== "undefined"){
+            
+            var reader = new FileReader();
+
+            // Last image added
+            var img = $('#demo-files').find('.demo-image-preview').eq(0);
+
+            reader.onload = function (e) {
+              img.attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(file);
+
+          } else {
+            // Hide/Remove all Images if FileReader isn't supported
+            $('#demo-files').find('.demo-image-preview').remove();
+          }
+          /*** Ends Image preview loader ***/          
         },
         onComplete: function(){
           $.danidemo.addLog('#demo-debug', 'default', 'All pending tranfers completed');
@@ -98,7 +118,7 @@
           if(data.st == 1){
               $.danidemo.updateFileStatus(id, 'error', 'Erro: '+data.msg);
           }else{
-              $.danidemo.updateFileStatus(id, 'success', 'Upload Completo <p><img src="<?php echo base_url()?>uploads/' + data.img +'" width="100" height="100" alt=""></p>');
+              $.danidemo.updateFileStatus(id, 'success', 'Upload Completo');
           }       
 
           $.danidemo.updateFileProgress(id, '100%');
